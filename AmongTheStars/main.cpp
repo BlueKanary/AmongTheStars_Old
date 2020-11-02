@@ -22,6 +22,7 @@ int main(int argc, char** argv) {
 
 	al_reserve_samples(1);
 
+	// Create allegro stuff
 	display = al_create_display(1080, 640);
 	event_queue = al_create_event_queue();
 	fps_timer = al_create_timer(1.0 / 30);
@@ -38,6 +39,7 @@ int main(int argc, char** argv) {
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 	al_register_event_source(event_queue, al_get_timer_event_source(fps_timer));
 
+	// Error when not loaded
 	assert(bitmap != NULL);
 	assert(sample != NULL);
 
