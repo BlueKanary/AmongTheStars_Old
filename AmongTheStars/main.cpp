@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 	event_queue = al_create_event_queue();
 	fps_timer = al_create_timer(1.0 / 30);
 	bitmap = al_load_bitmap("arial10x10.png");
-	//sample = al_load_sample("bensound-scifi.mp3");
+	sample = al_load_sample("bensound-scifi.mp3");
 
 	// Audio Sample
 	sample_instance = al_create_sample_instance(sample);
@@ -39,15 +39,17 @@ int main(int argc, char** argv) {
 	al_register_event_source(event_queue, al_get_timer_event_source(fps_timer));
 
 	assert(bitmap != NULL);
-	//assert(sample != NULL);
+	assert(sample != NULL);
 
 	// Game Variables
 	std::vector<Entity> entities;
 
-	Entity player(10, 10, 0, 10, al_map_rgba(255, 255, 255, 255));
-	entities.push_back(player);
-
-	GameMap map1(100, 60);
+	Entity e(10, 10, 0, 10, al_map_rgba(255, 255, 255, 255));
+	entities.push_back(e); // Copy "e" into entity list
+	
+	Entity& player = entities.at(0); // get pointer for player
+	
+	GameMap game_map(100, 60);
 
 	// Game Loop
 	bool running = true;
@@ -56,17 +58,19 @@ int main(int argc, char** argv) {
 
 		outcode out = input_handler(event_queue);
 
-		if (out.code == "exit") {
+		if (out.code == "exit") { // close game
 			running = false;
 		}
 		if (out.code == "move") {
 
-			if (!map1.tiles[entities.at(0).x + out.x][entities.at(0).y + out.y].blocked) {
-				entities.at(0).move(out.x, out.y);
+			if (game_map.in_bounds(player.x + out.x, player.y + out.y, game_map)) { // check in bounds of the map
+				if (!game_map.is_blocked(player.x + out.x, player.y + out.y)) {		// check inside map for walls
+					player.move(out.x, out.y);
+				}
 			}
 		}
 		if (out.code == "timer") {
-			render_all(bitmap, entities, map1);
+			render_all(bitmap, entities, game_map);
 		}
 
 		//if (!al_get_sample_instance_playing(sample_instance)) {
