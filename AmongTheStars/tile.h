@@ -13,8 +13,8 @@ class Tile {
 		int char_x = 130;
 		int char_y = 10;
 		ALLEGRO_COLOR color = Color::blue();
-		bool blocked = true;
-		bool sight_blocked = false;
+		bool walkable = false;
+		bool transparent = false;
 
 		bool visible = false;
 		bool explored = false;

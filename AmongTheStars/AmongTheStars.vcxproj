@@ -150,11 +150,13 @@
     <ClCompile Include="input_handler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rendering.cpp" />
+    <ClCompile Include="proc_gen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="color_list.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game_map.h" />
+    <ClInclude Include="proc_gen.h" />
     <ClInclude Include="input_handler.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="rendering.h" />
