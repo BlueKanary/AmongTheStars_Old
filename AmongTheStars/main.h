@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "rendering.h"
 #include "game_map.h"
+#include "proc_gen.h"
 
 #include "allegro5\allegro.h"
 #include "allegro5/allegro_image.h"

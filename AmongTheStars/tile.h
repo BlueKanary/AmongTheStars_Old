@@ -10,14 +10,17 @@ class Tile {
 
 	public:
 
-		int char_x = 130;
-		int char_y = 10;
-		ALLEGRO_COLOR color = Color::blue();
-		bool walkable = false;
-		bool transparent = false;
+		int x = 130;						// x and y select sprite on tilemap
+		int y = 10;
+		ALLEGRO_COLOR light = Color::red();
+		ALLEGRO_COLOR dark = Color::dark_red();
+		bool walkable = false;				// walk on the tile
+		bool transparent = false;			// see through the tile
 
-		bool visible = false;
-		bool explored = false;
-
+		bool visible = false;				// you can see this tile
+		bool explored = false;				// you have seen this tile
 
 };
+
+Tile type(int dx, int dy, ALLEGRO_COLOR light, ALLEGRO_COLOR dark, bool walkable, bool transparent);
+// Used for premade tiles (wall, floor, etc)
