@@ -12,8 +12,7 @@ class Entity {
 		int x;
 		int y;
 		int char_x;
-		int char_y;
-		ALLEGRO_COLOR color;
+		ALLEGRO_COLOR light;
 
 		Entity(int dx, int dy, int char_dx, int char_dy, ALLEGRO_COLOR dcolor);
 

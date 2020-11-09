@@ -52,6 +52,9 @@ int main(int argc, char** argv) {
 	Entity& player = entities.at(0); // get pointer for player
 	
 	GameMap game_map(100, 60);
+	Rectangle rect(1, 1, 5, 5);
+
+	clear_area(rect, game_map);
 
 	// Game Loop
 	bool running = true;
@@ -66,7 +69,7 @@ int main(int argc, char** argv) {
 		if (out.code == "move") {
 
 			if (game_map.in_bounds(player.x + out.x, player.y + out.y, game_map)) { // check in bounds of the map
-				if (!game_map.is_blocked(player.x + out.x, player.y + out.y)) {		// check inside map for walls
+				if (game_map.is_blocked(player.x + out.x, player.y + out.y)) {		// check inside map for walls
 					player.move(out.x, out.y);
 				}
 			}
