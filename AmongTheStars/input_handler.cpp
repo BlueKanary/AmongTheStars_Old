@@ -8,7 +8,7 @@ outcode input_handler(ALLEGRO_EVENT_QUEUE* event_queue) {
 	ALLEGRO_EVENT event;
 	al_get_next_event(event_queue, &event);
 
-	if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+	if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE || event.type == ALLEGRO_KEY_ESCAPE) {
 		out.code = "exit";
 	}
 

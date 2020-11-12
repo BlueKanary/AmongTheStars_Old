@@ -18,6 +18,8 @@ public:
 
 	Rectangle(int x, int y, int width, int height);
 
+	bool intersects(Rectangle rect);
 };
 
-void clear_area(Rectangle rect, GameMap map);
+void fill_map(GameMap map);
+void clear_room(Rectangle rect, GameMap map);
