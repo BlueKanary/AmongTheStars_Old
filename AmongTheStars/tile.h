@@ -10,15 +10,15 @@ class Tile {
 
 	public:
 
-		int x = 130;						// x and y select sprite on tilemap
-		int y = 10;
-		ALLEGRO_COLOR light = Color::red();
-		ALLEGRO_COLOR dark = Color::dark_red();
-		bool walkable = false;				// walk on the tile
-		bool transparent = false;			// see through the tile
+		int x;						// x and y select sprite on tilemap
+		int y;
+		ALLEGRO_COLOR light;
+		ALLEGRO_COLOR dark;
+		bool walkable;				// walk on the tile
+		bool transparent;			// see through the tile
 
-		bool visible = false;				// you can see this tile
-		bool explored = false;				// you have seen this tile
+		bool visible = false;		// you can see this tile
+		bool explored = false;		// you have seen this tile
 
 };
 

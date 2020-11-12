@@ -52,9 +52,10 @@ int main(int argc, char** argv) {
 	Entity& player = entities.at(0); // get pointer for player
 	
 	GameMap game_map(100, 60);
-	Rectangle rect(1, 1, 5, 5);
+	Rectangle rect(1, 1, 20, 20);
 
-	clear_area(rect, game_map);
+	fill_map(game_map);
+	clear_room(rect, game_map);
 
 	// Game Loop
 	bool running = true;

@@ -5,8 +5,8 @@ Entity::Entity(int dx, int dy, int char_dx, int char_dy, ALLEGRO_COLOR dcolor) {
 	x = dx;
 	y = dy;
 	char_x = char_dx;
-	y = char_dy;
-	light = dcolor;
+	char_y = char_dy;
+	color = dcolor;
 
 }
 
