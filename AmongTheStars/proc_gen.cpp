@@ -24,9 +24,40 @@ bool Rectangle::intersects(Rectangle rect) {	// Check for intersection with othe
 
 }
 
-void gen_dungeon() {
+void gen_dungeon(int max_rooms, int min_room_size, int max_room_size, GameMap map, Entity& player) {
 
+	std::vector<Rectangle> room_list;
 
+	for (int i = 0; i < max_rooms; i++) {
+
+		int width = std::rand() % (max_room_size - min_room_size) + min_room_size;
+		int height = std::rand() % (max_room_size - min_room_size) + min_room_size;
+
+		int x = std::rand() % (map.width - width);
+		int y = std::rand() % (map.height - height);
+
+		Rectangle new_room(x, y, width, height);
+
+		bool intersect = false;			// checks if room is intersecting another
+		for (auto room : room_list) {
+			if (new_room.intersects(room)) {
+				intersect = true;
+			}
+		}								// if room does intersect then try again
+		if (intersect) {
+			continue;		
+		}
+
+		clear_room(new_room, map);
+
+		if (room_list.size() == 0) {
+			player.x = new_room.x_center;
+			player.y = new_room.y_center;
+		}
+
+		room_list.push_back(new_room);
+
+	}
 
 }
 

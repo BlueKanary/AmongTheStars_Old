@@ -43,6 +43,9 @@ int main(int argc, char** argv) {
 	assert(bitmap != NULL);
 	assert(sample != NULL);
 
+	// Set Seed
+	std::srand(time(NULL));
+
 	// Game Variables
 	std::vector<Entity> entities;
 
@@ -52,10 +55,9 @@ int main(int argc, char** argv) {
 	Entity& player = entities.at(0); // get pointer for player
 	
 	GameMap game_map(100, 60);
-	Rectangle rect(1, 1, 20, 20);
-
 	fill_map(game_map);
-	clear_room(rect, game_map);
+
+	gen_dungeon(50, 10, 30, game_map, player);
 
 	// Game Loop
 	bool running = true;
