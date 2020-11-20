@@ -1,6 +1,7 @@
 #pragma once
 
 #include "game_map.h"
+#include "entity.h"
 #include "tile_types.h"
 
 #include "allegro5/allegro_color.h"
@@ -20,6 +21,8 @@ public:
 
 	bool intersects(Rectangle rect);
 };
+
+void gen_dungeon(int max_rooms, int min_room_size, int max_room_size, GameMap map, Entity& player);
 
 void fill_map(GameMap map);
 void clear_room(Rectangle rect, GameMap map);
