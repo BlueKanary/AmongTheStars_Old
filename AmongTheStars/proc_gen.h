@@ -26,3 +26,4 @@ void gen_dungeon(int max_rooms, int min_room_size, int max_room_size, GameMap ma
 
 void fill_map(GameMap map);
 void clear_room(Rectangle rect, GameMap map);
+void clear_hall(int x1, int y1, int x2, int y2, GameMap map);

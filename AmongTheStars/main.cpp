@@ -21,11 +21,11 @@ int main(int argc, char** argv) {
 	al_install_mouse();
 
 	al_reserve_samples(1);
-
+	
 	// Create allegro stuff
 	display = al_create_display(1080, 640);
 	event_queue = al_create_event_queue();
-	fps_timer = al_create_timer(1.0 / 30);
+	fps_timer = al_create_timer(1.0 / 100);
 	bitmap = al_load_bitmap("arial10x10.png");
 	sample = al_load_sample("bensound-scifi.mp3");
 
