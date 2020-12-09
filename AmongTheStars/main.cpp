@@ -47,17 +47,21 @@ int main(int argc, char** argv) {
 	std::srand(time(NULL));
 
 	// Game Variables
-	std::vector<Entity> entities;
-
-	Entity e(10, 10, 0, 10, al_map_rgba(255, 255, 255, 255));
-	entities.push_back(e); // Copy "e" into entity list
-	
-	Entity& player = entities.at(0); // get pointer for player
-	
 	GameMap game_map(100, 60);
+	game_map.initialize_tiles();
 	fill_map(game_map);
 
-	gen_dungeon(50, 10, 30, game_map, player);
+	std::vector<Entity> entities;
+
+	Entity e(10, 10, 0, 10, 25, al_map_rgba(255, 255, 255, 255), game_map);
+	entities.push_back(e); // Copy "e" into entity list
+
+	Entity& player = entities.at(0); // get pointer for player
+
+	gen_dungeon(100, 10, 20, game_map, player);
+
+	player.fov_compute();
+	compute_fov(player, game_map);
 
 	// Game Loop
 	bool running = true;
@@ -74,6 +78,8 @@ int main(int argc, char** argv) {
 			if (game_map.in_bounds(player.x + out.x, player.y + out.y, game_map)) { // check in bounds of the map
 				if (game_map.is_blocked(player.x + out.x, player.y + out.y)) {		// check inside map for walls
 					player.move(out.x, out.y);
+					player.fov_compute();
+					compute_fov(player, game_map);
 				}
 			}
 		}

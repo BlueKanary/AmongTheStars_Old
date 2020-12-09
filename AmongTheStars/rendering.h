@@ -10,5 +10,5 @@
 #include <vector>
 
 void render_all(ALLEGRO_BITMAP* bitmap, std::vector<Entity> entities, GameMap map);
-void draw_tile(ALLEGRO_BITMAP* bitmap, GameMap map, int x, int y);
+void draw_tile(ALLEGRO_BITMAP* bitmap, GameMap map, int x, int y, ALLEGRO_COLOR color);
 void draw_entity(ALLEGRO_BITMAP* bitmap, Entity entity);
