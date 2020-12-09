@@ -1,5 +1,6 @@
 #pragma once
 
+#include "camera.h"
 #include "input_handler.h"
 #include "entity.h"
 #include "rendering.h"

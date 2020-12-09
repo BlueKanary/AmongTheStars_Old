@@ -5,6 +5,8 @@ GameMap::GameMap(int dwidth, int dheight) {
 	width = dwidth;
 	height = dheight;
 
+	initialize_tiles();
+
 }
 
 void GameMap::initialize_tiles() {

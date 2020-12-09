@@ -48,7 +48,6 @@ int main(int argc, char** argv) {
 
 	// Game Variables
 	GameMap game_map(100, 60);
-	game_map.initialize_tiles();
 	fill_map(game_map);
 
 	std::vector<Entity> entities;
@@ -62,6 +61,8 @@ int main(int argc, char** argv) {
 
 	player.fov_compute();
 	compute_fov(player, game_map);
+
+	Camera camera(player, 108, 72);
 
 	// Game Loop
 	bool running = true;
@@ -80,11 +81,12 @@ int main(int argc, char** argv) {
 					player.move(out.x, out.y);
 					player.fov_compute();
 					compute_fov(player, game_map);
+					camera.reposition(player);
 				}
 			}
 		}
 		if (out.code == "timer") {
-			render_all(bitmap, entities, game_map);
+			render_all(bitmap, entities, game_map, camera);
 		}
 
 		//if (!al_get_sample_instance_playing(sample_instance)) {
