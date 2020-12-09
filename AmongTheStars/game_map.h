@@ -12,7 +12,6 @@ class GameMap {
 		int height;
 		Tile** tiles;
 
-		
 		GameMap(int width, int height);
 		GameMap() = default;
 

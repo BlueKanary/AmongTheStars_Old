@@ -1,6 +1,6 @@
 #include "rendering.h"
 
-void render_all(ALLEGRO_BITMAP* bitmap, std::vector<Entity> entities, GameMap map) {
+void render_all(ALLEGRO_BITMAP* bitmap, std::vector<Entity> entities, GameMap map, Camera camera) {
 
 	al_clear_to_color(Color::black());
 
@@ -16,23 +16,25 @@ void render_all(ALLEGRO_BITMAP* bitmap, std::vector<Entity> entities, GameMap ma
 				color = map.tiles[x][y].dark;
 			}
 
-			draw_tile(bitmap, map, x, y, color);
+			draw_tile(bitmap, map, camera, x, y, color);
 
 		}
 	}
 	for (int i = 0; i < entities.size(); i++) {
 
 		Entity entity = entities.at(i);
-		draw_entity(bitmap, entity);
+		draw_entity(bitmap, entity, camera);
 	}
 
 	al_flip_display();
 }
 
-void draw_tile(ALLEGRO_BITMAP* bitmap, GameMap map, int x, int y, ALLEGRO_COLOR color) {
-	al_draw_tinted_bitmap_region(bitmap, color, map.tiles[x][y].x, map.tiles[x][y].y, 10, 10, x * 10, y * 10, 0);
+void draw_tile(ALLEGRO_BITMAP* bitmap, GameMap map, Camera camera, int x, int y, ALLEGRO_COLOR color) {
+	al_draw_tinted_bitmap_region(bitmap, color, map.tiles[x][y].x, map.tiles[x][y].y, 
+		10, 10, (x + camera.x_position()) * 10, (y + camera.y_position()) * 10, 0);
 }
 
-void draw_entity(ALLEGRO_BITMAP* bitmap, Entity entity) {
-	al_draw_tinted_bitmap_region(bitmap, entity.color, entity.char_x, entity.char_y, 10, 10, entity.x * 10, entity.y * 10, 0);
+void draw_entity(ALLEGRO_BITMAP* bitmap, Entity entity, Camera camera) {
+	al_draw_tinted_bitmap_region(bitmap, entity.color, entity.char_x, entity.char_y, 10, 10, 
+		(entity.x + camera.x_position()) * 10, (entity.y + camera.y_position()) * 10, 0);
 }										// Tileset select = select x, select y, size x, size y

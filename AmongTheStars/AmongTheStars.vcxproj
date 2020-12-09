@@ -153,6 +153,7 @@
     <ClCompile Include="proc_gen.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="fov.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="game_map.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="fov.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="tile_types.h" />
     <ClInclude Include="proc_gen.h" />
     <ClInclude Include="input_handler.h" />
