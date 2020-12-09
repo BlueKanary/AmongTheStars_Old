@@ -8,7 +8,15 @@ void render_all(ALLEGRO_BITMAP* bitmap, std::vector<Entity> entities, GameMap ma
 
 		for (int y = 0; y < map.height; y++) {
 
-			draw_tile(bitmap, map, x, y);
+			ALLEGRO_COLOR color = Color::black();
+
+			if (map.tiles[x][y].visible) {
+				color = map.tiles[x][y].light;
+			} else if (map.tiles[x][y].explored) {
+				color = map.tiles[x][y].dark;
+			}
+
+			draw_tile(bitmap, map, x, y, color);
 
 		}
 	}
@@ -21,8 +29,8 @@ void render_all(ALLEGRO_BITMAP* bitmap, std::vector<Entity> entities, GameMap ma
 	al_flip_display();
 }
 
-void draw_tile(ALLEGRO_BITMAP* bitmap, GameMap map, int x, int y) {
-	al_draw_tinted_bitmap_region(bitmap, map.tiles[x][y].dark, map.tiles[x][y].x, map.tiles[x][y].y, 10, 10, x * 10, y * 10, 0);
+void draw_tile(ALLEGRO_BITMAP* bitmap, GameMap map, int x, int y, ALLEGRO_COLOR color) {
+	al_draw_tinted_bitmap_region(bitmap, color, map.tiles[x][y].x, map.tiles[x][y].y, 10, 10, x * 10, y * 10, 0);
 }
 
 void draw_entity(ALLEGRO_BITMAP* bitmap, Entity entity) {

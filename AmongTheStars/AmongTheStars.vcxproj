@@ -151,12 +151,16 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rendering.cpp" />
     <ClCompile Include="proc_gen.cpp" />
+    <ClCompile Include="engine.cpp" />
+    <ClCompile Include="fov.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="color_list.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game_map.h" />
+    <ClInclude Include="engine.h" />
+    <ClInclude Include="fov.h" />
     <ClInclude Include="tile_types.h" />
     <ClInclude Include="proc_gen.h" />
     <ClInclude Include="input_handler.h" />

@@ -5,7 +5,11 @@ GameMap::GameMap(int dwidth, int dheight) {
 	width = dwidth;
 	height = dheight;
 
-	tiles = new Tile*[width];
+}
+
+void GameMap::initialize_tiles() {
+
+	tiles = new Tile * [width];
 
 	for (int i = 0; i < width; i++) {
 
