@@ -33,9 +33,6 @@
     <ClCompile Include="rendering.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="proc_gen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -68,9 +65,6 @@
     <ClInclude Include="tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="proc_gen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -89,16 +83,6 @@
     <ClInclude Include="tile_types.h">
       <Filter>Header Files\Lists</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="arial10x10.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="bensound-scifi.mp3">
-      <Filter>Resource Files</Filter>
-    </Media>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
