@@ -163,6 +163,7 @@
     <ClInclude Include="engine.h" />
     <ClInclude Include="fov.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="entity_list.h" />
     <ClInclude Include="tile_types.h" />
     <ClInclude Include="proc_gen.h" />
     <ClInclude Include="input_handler.h" />

@@ -1,6 +1,9 @@
 #include "proc_gen.h"
 
-Rectangle::Rectangle(int x, int y, int width, int height) {
+; Rectangle::Rectangle(int x, int y, int dwidth, int dheight) { // Class for rectangular rooms
+
+	width = dwidth;
+	height = dheight;
 
 	x1 = x;
 	y1 = y;
@@ -24,17 +27,22 @@ bool Rectangle::intersects(Rectangle rect) {	// Check for intersection with othe
 
 }
 
-void gen_dungeon(int max_rooms, int min_room_size, int max_room_size, GameMap map, Entity& player) {
+GameMap gen_dungeon(int max_rooms, int min_room_size, int max_room_size, int floor_width, int floor_height, Entity& player) {
 
 	std::vector<Rectangle> room_list;
 
-	for (int i = 0; i < max_rooms; i++) {
+	// create temp map
+	GameMap new_floor(floor_width, floor_height);
+
+	fill_map(new_floor);
+
+	for (int i = 0; i < max_rooms; i++) {	// Generates map using basic algorithm
 
 		int width = std::rand() % (max_room_size - min_room_size) + min_room_size;
 		int height = std::rand() % (max_room_size - min_room_size) + min_room_size;
 
-		int x = std::rand() % (map.width - width);
-		int y = std::rand() % (map.height - height);
+		int x = std::rand() % (new_floor.width - width);
+		int y = std::rand() % (new_floor.height - height);
 
 		Rectangle new_room(x, y, width, height);
 
@@ -47,47 +55,52 @@ void gen_dungeon(int max_rooms, int min_room_size, int max_room_size, GameMap ma
 		if (intersect) {
 			continue;		
 		}
-
-		clear_room(new_room, map);
-
+		
+		clear_room(new_room, new_floor);
+		
 		if (room_list.size() == 0) {			// put player in center of first room
 			player.x = new_room.x_center;
 			player.y = new_room.y_center;
 		} else {								// gets a hall from center of new_room to center of old room
 			
 			Rectangle old_room = room_list.at(room_list.size() - 1);
-			clear_hall(new_room.x_center, new_room.y_center, old_room.x_center, old_room.y_center, map);
+			clear_hall(new_room.x_center, new_room.y_center, old_room.x_center, old_room.y_center, new_floor);
 
 		}
 
 		room_list.push_back(new_room);
 
 	}
+
+	// return the gamemap
+	//new_floor.room_list = room_list;
+	return new_floor;
+
 }
 
-void fill_map(GameMap map) {		// Fills map with walls
+void fill_map(GameMap new_floor) {		// Fills map with walls
 
-	for (int x = 0; x < map.width; x++) {
-		for (int y = 0; y < map.height; y++) {
+	for (int x = 0; x < new_floor.width; x++) {
+		for (int y = 0; y < new_floor.height; y++) {
 
-			map.tiles[x][y] = TileType::wall();
+			new_floor.tiles[x][y] = TileType::wall();
 
 		}
 	}
 }
 
-void clear_room(Rectangle rect, GameMap map) {		// Turns inside of room with floor
+void clear_room(Rectangle rect, GameMap new_floor) {		// Turns inside of room with floor
 
 	for (int x = rect.x1 + 1; x < rect.x2; x++) {
 		for (int y = rect.y1 + 1; y < rect.y2; y++) {
 
-			map.tiles[x][y] = TileType::floor();
+			new_floor.tiles[x][y] = TileType::floor();
 
 		}
 	}
 }
 
-void clear_hall(int x1, int y1, int x2, int y2, GameMap map) {
+void clear_hall(int x1, int y1, int x2, int y2, GameMap new_floor) {
 
 	int corner_x;
 	int corner_y;
@@ -116,10 +129,26 @@ void clear_hall(int x1, int y1, int x2, int y2, GameMap map) {
 	}
 
 	for (int x = x1; x != x2; x += x_dir) {
-		map.tiles[x][corner_y] = TileType::floor();
+		new_floor.tiles[x][corner_y] = TileType::floor();
 	}
 	for (int y = y1; y != y2; y += y_dir) {
-		map.tiles[corner_x][y] = TileType::floor();
+		new_floor.tiles[corner_x][y] = TileType::floor();
 	}
 
 }
+
+
+/*std::vector<Entity> place_entities(GameMap map) {
+
+	std::vector<Entity> entities;
+
+	for (Rectangle room : map.room_list) {
+		int x = std::rand() % room.width + room.x1 + 1;
+		int y = std::rand() % room.height + room.y1 + 1;
+
+		Entity entity = EntityList::drifter_1(x, y);
+	}
+	
+	return entities;
+}
+*/

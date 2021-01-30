@@ -21,7 +21,7 @@ struct Slope {
 
 	bool greater(int dy, int dx) { return y * dx > x * dy; }
 	bool greater_or_equal(int dy, int dx) { return y * dx >= x * dy; }
-	bool less(int dy, int dx) { return y * dx < x* dy; }
+	bool less(int dy, int dx) { return y * dx < x * dy; }
 
 };
 
@@ -38,5 +38,5 @@ class MyVisibility {
 		int get_distance(int x, int y);
 
 		void fov_compute(LevelPoint origin, int range_limit, GameMap map);
-		void compute(unsigned int octant, LevelPoint origin, int range_limit, unsigned int x, Slope* top, Slope* bottom, GameMap map);
+		void compute(unsigned int octant, LevelPoint origin, int range_limit, unsigned int x, Slope top, Slope bottom, GameMap map);
 };

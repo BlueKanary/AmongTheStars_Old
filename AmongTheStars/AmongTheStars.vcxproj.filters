@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Lists">
+      <UniqueIdentifier>{f523a873-20ff-4f50-ab11-4e6e667cc49f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -59,9 +62,6 @@
     <ClInclude Include="entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="color_list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rendering.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -69,9 +69,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="proc_gen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tile_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine.h">
@@ -82,6 +79,15 @@
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="color_list.h">
+      <Filter>Header Files\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="entity_list.h">
+      <Filter>Header Files\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="tile_types.h">
+      <Filter>Header Files\Lists</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

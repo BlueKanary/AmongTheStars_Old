@@ -10,8 +10,8 @@ class Tile {
 
 	public:
 
-		int x;						// x and y select sprite on tilemap
-		int y;
+		int char_x;						// x and y select sprite on tilemap
+		int char_y;
 		ALLEGRO_COLOR light;
 		ALLEGRO_COLOR dark;
 		bool walkable;				// walk on the tile
