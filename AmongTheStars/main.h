@@ -8,6 +8,8 @@
 #include "proc_gen.h"
 #include "fov.h"
 #include "engine.h"
+#include "color_list.h"
+#include "entity_list.h"
 
 #include "allegro5\allegro.h"
 #include "allegro5/allegro_image.h"

@@ -4,8 +4,8 @@ Tile type(int dx, int dy, ALLEGRO_COLOR light, ALLEGRO_COLOR dark, bool walkable
 
 	Tile tile;
 
-	tile.x = dx;
-	tile.y = dy;
+	tile.char_x = dx;
+	tile.char_y = dy;
 	tile.light = light;
 	tile.dark = dark;
 	tile.walkable = walkable;

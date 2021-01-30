@@ -21,9 +21,11 @@ class Entity {
 		GameMap sight_map;
 		MyVisibility fov;
 
-		Entity(int dx, int dy, int char_dx, int char_dy, int range, ALLEGRO_COLOR dcolor, GameMap map);
+		Entity(int dx, int dy, int char_dx, int char_dy, int range, ALLEGRO_COLOR dcolor);
 
 		void move(int dx, int dy);
+
+		void fov_map(GameMap map);
 		void fov_compute();
 
 };

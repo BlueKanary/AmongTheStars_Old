@@ -57,36 +57,38 @@ void MyVisibility::fov_compute(LevelPoint origin, int range_limit, GameMap map) 
 
 	_set_visible(origin.x, origin.y, map);
 
+	Slope top(1, 1); Slope bottom(0, 1);
+
 	for (unsigned int octant = 0; octant < 8; octant++) {
-		compute(octant, origin, range_limit, 1, new Slope(1, 1), new Slope(0, 1), map);
+		compute(octant, origin, range_limit, 1, top, bottom, map);
 	}
 
 }
 
-void MyVisibility::compute(unsigned int octant, LevelPoint origin, int range_limit, unsigned int x, Slope* top, Slope* bottom, GameMap map) {
+void MyVisibility::compute(unsigned int octant, LevelPoint origin, int range_limit, unsigned int x, Slope top, Slope bottom, GameMap map) {
 
 	for (; x <= (unsigned int)range_limit; x++) {
 
 		unsigned int top_y;
-		if (top->x == 1) {
+		if (top.x == 1) {
 			top_y = x;
 		} else {
-			top_y = ((x * 2 - 1) * top->y + top->x) / (top->x * 2);
-			if (blocks_light(x, top->y, octant, origin, map)) {
-				if (top->greater_or_equal(top_y * 2 + 1, x * 2) && !blocks_light(x, top_y + 1, octant, origin, map)) top_y++;
+			top_y = ((x * 2 - 1) * top.y + top.x) / (top.x * 2);
+			if (blocks_light(x, top.y, octant, origin, map)) {
+				if (top.greater_or_equal(top_y * 2 + 1, x * 2) && !blocks_light(x, top_y + 1, octant, origin, map)) top_y++;
 			} else {
 				unsigned int ax = x * 2;
 				if (blocks_light(x + 1, top_y + 1, octant, origin, map)) ax++;
-				if (top->greater(top_y * 2 + 1, ax)) top_y++;
+				if (top.greater(top_y * 2 + 1, ax)) top_y++;
 			}
 		}
 
 		unsigned int bottom_y;
-		if (bottom->y == 0) {
+		if (bottom.y == 0) {
 			bottom_y = 0;
 		} else {
-			bottom_y = ((x * 2 - 1) * bottom->y + bottom->x) / ((bottom->x * 2));
-			if (bottom->greater_or_equal(bottom_y * 2 + 1, x * 2) && blocks_light(x, bottom_y, octant, origin, map) &&
+			bottom_y = ((x * 2 - 1) * bottom.y + bottom.x) / ((bottom.x * 2));
+			if (bottom.greater_or_equal(bottom_y * 2 + 1, x * 2) && blocks_light(x, bottom_y, octant, origin, map) &&
 				!blocks_light(x, bottom_y + 1, octant, origin, map)) bottom_y++;
 		}
 
@@ -95,19 +97,19 @@ void MyVisibility::compute(unsigned int octant, LevelPoint origin, int range_lim
 			if (range_limit < 0 || get_distance((int)x, (int)y) <= range_limit) {
 				bool is_opaque = blocks_light(x, y, octant, origin, map);
 				bool is_visible =
-				is_opaque || ((y != top_y || top->greater(y * 4 - 1, x * 4 + 1)) && (y != bottom_y || bottom->less(y * 4 + 1, x * 4 - 1)));
+				is_opaque || ((y != top_y || top.greater(y * 4 - 1, x * 4 + 1)) && (y != bottom_y || bottom.less(y * 4 + 1, x * 4 - 1)));
 				if (is_visible) set_visible(x, y, octant, origin, map);
 				if (x != range_limit) {
 					if (is_opaque) {
 						if (was_opaque == 0) {
 							unsigned int nx = x * 2, ny = y * 2 + 1;
 							if (blocks_light(x, y + 1, octant, origin, map)) nx--;
-							if (top->greater(ny, nx)) {
+							if (top.greater(ny, nx)) {
 								if (y == bottom_y) {
-									bottom = new Slope(ny, nx); 
+									bottom = Slope(ny, nx); 
 									break;
 								} else {
-									compute(octant, origin, range_limit, x + 1, top, new Slope(ny, nx), map);
+									compute(octant, origin, range_limit, x + 1, top, Slope(ny, nx), map);
 								}
 							} else {
 								if (y == bottom_y) return;
@@ -118,8 +120,8 @@ void MyVisibility::compute(unsigned int octant, LevelPoint origin, int range_lim
 						if (was_opaque > 0) {
 							unsigned int nx = x * 2, ny = y * 2 + 1;
 							if (blocks_light(x + 1, y + 1, octant, origin, map)) nx++;
-							if (bottom->greater_or_equal(ny, nx)) return;
-							top = new Slope(ny, nx);
+							if (bottom.greater_or_equal(ny, nx)) return;
+							top = Slope(ny, nx);
 						}
 						was_opaque = 0;
 					}

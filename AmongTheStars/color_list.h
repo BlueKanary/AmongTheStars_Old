@@ -3,6 +3,12 @@
 #include "allegro5/allegro_color.h"
 
 struct Color {	// Premade Colors
+
+	// Lists will eventually be written in scripting format for easier modifications
+	// from both Myself and Modders
+
+	static const ALLEGRO_COLOR null() { return(al_map_rgba(0, 0, 0, 0)); } // for colored sprites
+
 	static const ALLEGRO_COLOR white() { return(al_map_rgba(255, 255, 255, 255)); }
 	static const ALLEGRO_COLOR grey() { return(al_map_rgba(125, 125, 125, 255)); }
 	static const ALLEGRO_COLOR black() { return(al_map_rgba(0, 0, 0, 255)); }
