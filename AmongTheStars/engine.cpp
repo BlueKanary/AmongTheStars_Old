@@ -8,16 +8,3 @@ void compute_fov(Entity player, GameMap map) {
 		}
 	}
 }
-
-void handle_actions(outcode out) {
-
-	if (out.code == "exit") { // close game
-		
-	}
-	if (out.code == "move") {
-
-	}
-	if (out.code == "timer") {
-
-	}
-}

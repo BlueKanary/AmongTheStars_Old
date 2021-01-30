@@ -26,9 +26,8 @@ int main(int argc, char** argv) {
 	display = al_create_display(1080, 640);
 	event_queue = al_create_event_queue();
 	fps_timer = al_create_timer(1.0 / 100);
-
-	//bitmap = al_load_bitmap("arial10x10.png");
-	//sample = al_load_sample("bensound-scifi.mp3");
+	bitmap = al_load_bitmap("arial10x10.png");
+	sample = al_load_sample("bensound-scifi.mp3");
 
 	// Audio Sample
 	sample_instance = al_create_sample_instance(sample);
@@ -41,14 +40,24 @@ int main(int argc, char** argv) {
 	al_register_event_source(event_queue, al_get_timer_event_source(fps_timer));
 
 	// Error when not loaded
-	//assert(bitmap != NULL);
-	//assert(sample != NULL);
+	assert(bitmap != NULL);
+	assert(sample != NULL);
 
 	// Set Seed
 	std::srand(time(NULL));
 
 	// Game Variables
-	
+	std::vector<Entity> entities;
+	entities.push_back(EntityList::player());
+	Entity& player = entities.at(0);
+	GameMap game_map = gen_dungeon(100, 10, 20, 100, 60, player);
+
+	player.fov_map(game_map);
+	player.fov_compute();
+	compute_fov(player, game_map);
+
+	Camera camera(player, 108, 72);
+
 	// Game Loop
 	bool running = true;
 	al_start_timer(fps_timer);
@@ -56,7 +65,24 @@ int main(int argc, char** argv) {
 
 		outcode out = input_handler(event_queue);
 
-		handle_actions(out);
+		player.fov_compute();
+		compute_fov(player, game_map);
+
+		if (out.code == "exit") { // close game
+			running = false;
+		}
+		if (out.code == "move") {
+
+			if (game_map.in_bounds(player.x + out.x, player.y + out.y, game_map)) { // check in bounds of the map
+				if (game_map.is_blocked(player.x + out.x, player.y + out.y)) {		// check inside map for walls
+					player.move(out.x, out.y);
+					camera.reposition(player);
+				}
+			}
+		}
+		if (out.code == "timer") {
+			render_all(bitmap, entities, game_map, camera);
+		}
 
 		//if (!al_get_sample_instance_playing(sample_instance)) {
 		//	al_play_sample_instance(sample_instance);

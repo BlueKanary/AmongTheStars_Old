@@ -24,7 +24,6 @@
     <ProjectGuid>{50753bbd-393b-4521-b27c-ae95896a380e}</ProjectGuid>
     <RootNamespace>AmongTheStars</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>StellarEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -85,7 +84,6 @@
     <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
     <Allegro_AddonColor>true</Allegro_AddonColor>
     <Allegro_AddonVideo>true</Allegro_AddonVideo>
-    <Allegro_AddonTTF>false</Allegro_AddonTTF>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -152,6 +150,7 @@
     <ClCompile Include="input_handler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rendering.cpp" />
+    <ClCompile Include="proc_gen.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="fov.cpp" />
     <ClCompile Include="camera.cpp" />
@@ -166,10 +165,17 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="entity_list.h" />
     <ClInclude Include="tile_types.h" />
+    <ClInclude Include="proc_gen.h" />
     <ClInclude Include="input_handler.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="rendering.h" />
     <ClInclude Include="tile.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="arial10x10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="bensound-scifi.mp3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
