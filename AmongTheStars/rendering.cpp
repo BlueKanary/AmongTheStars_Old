@@ -1,6 +1,6 @@
 #include "rendering.h"
 
-void render_all(ALLEGRO_BITMAP* bitmap, std::vector<Entity> entities, GameMap map, Camera camera) {
+void render_all(ALLEGRO_BITMAP* bitmap, Entity entities[], GameMap map, Camera camera) {
 
 	al_clear_to_color(Color::black());
 
@@ -21,9 +21,14 @@ void render_all(ALLEGRO_BITMAP* bitmap, std::vector<Entity> entities, GameMap ma
 		}
 	}
 
-	for (int i = 0; i < entities.size(); i++) {
-		Entity entity = entities.at(i);
-		draw_entity(bitmap, entity, camera);
+	for (int i = 0; i < 256; i++) {
+		Entity entity = entities[i];
+
+		if (!entity.blank) {
+			draw_entity(bitmap, entity, camera);
+		}
+
+		
 	}
 
 	al_flip_display();

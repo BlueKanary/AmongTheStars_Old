@@ -27,7 +27,8 @@ bool Rectangle::intersects(Rectangle rect) {	// Check for intersection with othe
 
 }
 
-GameMap gen_dungeon(int max_rooms, int min_room_size, int max_room_size, int floor_width, int floor_height, Entity& player) {
+GameMap gen_dungeon(int max_rooms, int min_room_size, int max_room_size, int floor_width, int floor_height, Entity& player,
+	Entity entity_list[], int e_list_num) {
 
 	std::vector<Rectangle> room_list;
 
@@ -53,10 +54,21 @@ GameMap gen_dungeon(int max_rooms, int min_room_size, int max_room_size, int flo
 			}
 		}								// if room does intersect then try again
 		if (intersect) {
-			continue;		
+			continue;
 		}
 		
 		clear_room(new_room, new_floor);
+
+		for (int i = 0; i < 2; i++) {	// Place entities in room
+			int x = std::rand() % (new_room.width - 1) + (new_room.x1 + 1);
+			int y = std::rand() % (new_room.height - 1) + (new_room.y1 + 1);
+
+			if (e_list_num >= 256) { break; }
+
+			Entity entity = EntityList::drifter_1(x, y);
+			entity_list[e_list_num] = entity;
+			e_list_num++;
+		}
 		
 		if (room_list.size() == 0) {			// put player in center of first room
 			player.x = new_room.x_center;
@@ -72,8 +84,6 @@ GameMap gen_dungeon(int max_rooms, int min_room_size, int max_room_size, int flo
 
 	}
 
-	// return the gamemap
-	//new_floor.room_list = room_list;
 	return new_floor;
 
 }
@@ -136,19 +146,3 @@ void clear_hall(int x1, int y1, int x2, int y2, GameMap new_floor) {
 	}
 
 }
-
-
-/*std::vector<Entity> place_entities(GameMap map) {
-
-	std::vector<Entity> entities;
-
-	for (Rectangle room : map.room_list) {
-		int x = std::rand() % room.width + room.x1 + 1;
-		int y = std::rand() % room.height + room.y1 + 1;
-
-		Entity entity = EntityList::drifter_1(x, y);
-	}
-	
-	return entities;
-}
-*/

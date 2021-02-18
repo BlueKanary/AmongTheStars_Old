@@ -18,10 +18,13 @@ class Entity {
 		int sight_range;
 		ALLEGRO_COLOR color;
 
+		bool blank = false;
+
 		GameMap sight_map;
 		MyVisibility fov;
 
 		Entity(int dx, int dy, int char_dx, int char_dy, int range, ALLEGRO_COLOR dcolor);
+		Entity() { blank = true; }
 
 		void move(int dx, int dy);
 
