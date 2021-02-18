@@ -10,6 +10,6 @@
 
 #include <vector>
 
-void render_all(ALLEGRO_BITMAP* bitmap, std::vector<Entity> entities, GameMap map, Camera camera);
+void render_all(ALLEGRO_BITMAP* bitmap, Entity entities[], GameMap map, Camera camera);
 void draw_tile(ALLEGRO_BITMAP* bitmap, GameMap map, Camera camera, int x, int y, ALLEGRO_COLOR color);
 void draw_entity(ALLEGRO_BITMAP* bitmap, Entity entity, Camera camera);

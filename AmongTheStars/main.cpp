@@ -47,10 +47,13 @@ int main(int argc, char** argv) {
 	std::srand(time(NULL));
 
 	// Game Variables
-	std::vector<Entity> entities;
-	entities.push_back(EntityList::player());
-	Entity& player = entities.at(0);
-	GameMap game_map = gen_dungeon(100, 10, 20, 100, 60, player);
+	Entity entities[256];
+	int e_list_num = 1;		// current entity limit number
+
+	entities[0] = EntityList::player();
+	Entity& player = entities[0];
+
+	GameMap game_map = gen_dungeon(100, 10, 20, 100, 60, player, entities, e_list_num);
 
 	player.fov_map(game_map);
 	player.fov_compute();

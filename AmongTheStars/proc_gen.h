@@ -30,8 +30,8 @@ public:
 	bool intersects(Rectangle rect);
 };
 
-GameMap gen_dungeon(int max_rooms, int min_room_size, int max_room_size, int floor_width, int floor_height, Entity& player);
-//std::vector<Entity> place_entities(GameMap map);
+GameMap gen_dungeon(int max_rooms, int min_room_size, int max_room_size, int floor_width, int floor_height, Entity& player,
+	Entity entity_list[], int e_list_num);
 
 void fill_map(GameMap new_floor);
 void clear_room(Rectangle rect, GameMap new_floor);
