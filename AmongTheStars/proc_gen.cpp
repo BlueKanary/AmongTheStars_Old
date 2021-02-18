@@ -28,7 +28,7 @@ bool Rectangle::intersects(Rectangle rect) {	// Check for intersection with othe
 }
 
 GameMap gen_dungeon(int max_rooms, int min_room_size, int max_room_size, int floor_width, int floor_height, Entity& player,
-	Entity entity_list[], int e_list_num) {
+	Entity entities[], int e_list_num) {
 
 	std::vector<Rectangle> room_list;
 
@@ -59,14 +59,25 @@ GameMap gen_dungeon(int max_rooms, int min_room_size, int max_room_size, int flo
 		
 		clear_room(new_room, new_floor);
 
-		for (int i = 0; i < 2; i++) {	// Place entities in room
+		int entity_amount = 1;
+		for (int i = 0; i < entity_amount; i++) {	// Place entities in room
 			int x = std::rand() % (new_room.width - 1) + (new_room.x1 + 1);
 			int y = std::rand() % (new_room.height - 1) + (new_room.y1 + 1);
 
 			if (e_list_num >= 256) { break; }
 
+			intersect = false;
+			for (int n = 0; n < e_list_num; n++) {
+				if (x == entities[n].x && y == entities[n].y) {
+					intersect = true;
+				}
+			}								// if entity is on top of another dont spawn
+			if (intersect) {
+				continue;
+			}
+
 			Entity entity = EntityList::drifter_1(x, y);
-			entity_list[e_list_num] = entity;
+			entities[e_list_num] = entity;
 			e_list_num++;
 		}
 		
