@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
 			}
 		}
 		if (out.code == "timer") {
-			render_all(bitmap, entities, game_map, camera);
+			render_all(bitmap, entities, game_map, camera, player);
 		}
 
 		//if (!al_get_sample_instance_playing(sample_instance)) {
